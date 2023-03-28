@@ -1,0 +1,8 @@
+.git
+addons/*
+backups/*
+cache/stingle_cache/*
+cache/templates_compile/*
+configsSite/*
+vendor/*
+.env

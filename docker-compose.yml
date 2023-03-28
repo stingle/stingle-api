@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "./:/var/www/html"
+      - "crond:/etc/cron.d"
+      - "letsencrypt:/etc/letsencrypt"
+      - "apachesites:/etc/apache2/sites-enabled"
+  mysql-server:
+    restart: always
+    image: mysql:5.7
+    volumes:
+      - "mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: "${MYSQL_USER_PASSWORD}"
+      MYSQL_DATABASE: 'stingle_api'
+  memcached:
+    restart: always
+    image: memcached:latest
+  phpmyadmin:
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql-server
+    ports:
+      - "127.0.0.1:8082:80"
+    depends_on:
+      - mysql-server
+    environment:
+      MYSQL_USERNAME: user
+      MYSQL_ROOT_PASSWORD: '${MYSQL_USER_PASSWORD}'
+      PMA_HOST: mysql-server
+volumes:
+  mysql: { }
+  crond: { }
+  letsencrypt: { }
+  apachesites: { }

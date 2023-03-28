@@ -1,0 +1,10 @@
+.directory
+.buildpath
+.project
+.settings
+.idea
+.vscode
+/nbproject/
+/vendor/
+/addons/
+.env
