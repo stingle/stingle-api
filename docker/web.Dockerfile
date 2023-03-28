@@ -4,15 +4,20 @@ RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y vim unzip certbot python-certbot-apache libz-dev libmemcached-dev mariadb-client cron && \
+RUN apt-get install -y vim unzip certbot python-certbot-apache libz-dev libmemcached-dev mariadb-client cron openssl && \
     pecl install memcache && \
     docker-php-ext-enable memcache
 RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
 RUN pecl config-set php_ini /etc/php.ini
 RUN docker-php-ext-install mysqli
 
-COPY ./docker/ssl/ssl.crt /etc/apache2/ssl/ssl.crt
-COPY ./docker/ssl/ssl.key /etc/apache2/ssl/ssl.key
+# Generate a self-signed certificate and key
+RUN mkdir -p /etc/apache2/ssl/
+RUN openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+    -subj "/C=US/ST=CA/L=San Francisco/O=Stingle/CN=localhost" \
+    -keyout /etc/apache2/ssl/ssl.key \
+    -out /etc/apache2/ssl/ssl.crt
+
 RUN mkdir -p /var/run/apache2/
 COPY ./docker/config/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY ./docker/config/php.ini "$PHP_INI_DIR/php.ini"
@@ -32,5 +37,3 @@ RUN /bin/bash -c 'chmod -R 777 /var/www/html/cache'
 EXPOSE 80
 EXPOSE 443
 CMD ["apache2-foreground"]
-
-#
