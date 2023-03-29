@@ -4,7 +4,7 @@ RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y vim unzip certbot python3-certbot-apache libz-dev libmemcached-dev mariadb-client cron openssl && \
+RUN apt-get install -y vim unzip certbot python3-certbot-apache libz-dev libmemcached-dev mariadb-client cron openssl git && \
     pecl install memcache && \
     docker-php-ext-enable memcache
 RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
