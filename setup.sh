@@ -71,7 +71,7 @@ if [ ! -f $ENV_FILE_LOCATION ]; then
 
   MYSQL_ROOT_PASSWORD=$(tr -cd '[:alnum:]' </dev/urandom | fold -w32 | head -n 1)
   MYSQL_USER_PASSWORD=$(tr -cd '[:alnum:]' </dev/urandom | fold -w32 | head -n 1)
-  CONTAINER_NAME=stingle_api
+  CONTAINER_NAME=stingle-api-dev
 
   echo -e "MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" >> $ENV_FILE_LOCATION
   echo -e "MYSQL_USER_PASSWORD=$MYSQL_USER_PASSWORD" >> $ENV_FILE_LOCATION
