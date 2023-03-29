@@ -73,6 +73,8 @@ try {
         }
         
         echo "Successfully uploaded!\n";
+        echo "Filename for restoration: $folderName\n";
+        
     }
     
     $LOCAL_BACKUPS_LIMIT = ConfigManager::getGlobalConfig()->Backup->Limit;

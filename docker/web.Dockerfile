@@ -1,10 +1,10 @@
-FROM php:8.0-apache-buster
+FROM php:8.0.28-apache-bullseye
 WORKDIR /var/www/html/
 RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y vim unzip certbot python-certbot-apache libz-dev libmemcached-dev mariadb-client cron openssl && \
+RUN apt-get install -y vim unzip certbot python3-certbot-apache libz-dev libmemcached-dev mariadb-client cron openssl && \
     pecl install memcache && \
     docker-php-ext-enable memcache
 RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
