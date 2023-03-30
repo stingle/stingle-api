@@ -6,3 +6,4 @@ if [ $# -eq 0 ]
 fi
 
 docker build -t stingle/stingle-api:latest -t stingle/stingle-api:$1 -f docker/web.Dockerfile --pull .
+docker push -a stingle/stingle-api
