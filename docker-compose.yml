@@ -12,7 +12,7 @@ services:
       - "./:/var/www/html"
       - "crond:/etc/cron.d"
       - "letsencrypt:/etc/letsencrypt"
-      - "apachesites:/etc/apache2/sites-enabled"
+      - "apache:/etc/apache2"
   mysql-server:
     restart: always
     image: mysql:8-debian
@@ -44,4 +44,4 @@ volumes:
   mysql: { }
   crond: { }
   letsencrypt: { }
-  apachesites: { }
+  apache: { }
