@@ -2,17 +2,6 @@
 
 function isLogined($makeOutput = true, $doLogoutOnFailure = true) {
     if (!isAuthorized()) {
-        $message =
-            "Get:\n" . print_r($_GET, true) . "\n\n" .
-            "Post:\n" . print_r($_POST, true) . "\n\n" .
-            "Cookie:\n" . print_r($_COOKIE, true) . "\n\n" .
-            "Files:\n" . print_r($_FILES, true) . "\n\n";
-        if (isset($_SESSION)) {
-            $message .= "Session:\n" . print_r($_SESSION, true) . "\n\n";
-        }
-        $message .= "Server:\n". print_r($_SERVER,true);
-        DBLogger::logCustom("Logout", $message);
-        
         if ($makeOutput) {
             if($doLogoutOnFailure) {
                 Reg::get('error')->add(C('Not authorized! Please login.'));
