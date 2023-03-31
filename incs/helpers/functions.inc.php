@@ -32,17 +32,23 @@ function logInDbAndKeybase($name, $keybaseChannel, $msg){
     Reg::get("keybase")->send($msg, $keybaseChannel);
 }
 
-function healthCheck(){
+function healthCheck(bool $output = false){
     try {
         $pager = new MysqlPager(1);
         $users = Reg::get('userMgr')->getUsersList(null, $pager);
         if(!empty($users)) {
             Reg::get('spsync')->getFileFromDb('sdfsdfdsf', $users[0]);
         }
+        if($output){
+            echo "OK\n";
+        }
         return true;
     }
     catch (Exception $e){
         Reg::get("keybase")->send("ATTENTION! Stingle API server is down!\n\n" . $e->getMessage(), 'exceptions');
+        if($output){
+            echo "ATTENTION! Stingle API server is down!\n\n" . $e->getMessage() . "\n";
+        }
     }
     return false;
 }

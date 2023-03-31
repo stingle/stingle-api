@@ -1,2 +1,2 @@
 <?php
-healthCheck();
+healthCheck(true);
