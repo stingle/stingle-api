@@ -25,7 +25,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Cron
 COPY ./docker/cron/crontab /etc/cron.d/stingle-crontab
-RUN chmod 0644 /etc/cron.d/stingle-crontab && crontab /etc/cron.d/stingle-crontab
 
 RUN ln -s /usr/local/bin/php /usr/bin/php
 
@@ -36,4 +35,4 @@ RUN /bin/bash -c 'chmod -R 777 /var/www/html/cache'
 
 EXPOSE 80
 EXPOSE 443
-CMD ["apache2-foreground"]
+CMD ["docker/startup.sh"]

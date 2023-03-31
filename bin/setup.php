@@ -12,6 +12,8 @@ $longopts  = array(
     "storage",
     "backup",
     "hostname",
+    "backupcron",
+    "rmbackupcron",
     "help"
 );
 $options = getopt($shortopts, $longopts);
@@ -28,6 +30,8 @@ Usage:
 --storage       S3 storage configuration
 --backup        Backup configuration
 --hostname      Set a hostname
+--backupcron    Install cronjob for backups
+--rmbackupcron  Remove cronjob for backups
 -h --help       Display this help message
 ";
     exit;
@@ -200,9 +204,10 @@ You can decrypt backup files by running 'bin/decryptBackup.php'
 ## /BACKUP
 
 ";
-        if(!existsInCrontab("cgi.php module=v2 page=tools subpage=backup")){
-            exec('(crontab -l ; echo "0 0,12 * * *    cd /var/www/html/ && ./cgi.php module=v2 page=tools subpage=backup") | crontab');
-        }
+        installBackupCron();
+    }
+    else{
+        removeBackupCron();
     }
 }
 
@@ -246,6 +251,13 @@ if($isFull || isset($options['hostname'])) {
         file_put_contents($apacheConfPath, $apacheConf);
         exec('service apache2 reload');
     }
+}
+
+if(isset($options['backupcron'])) {
+    installBackupCron();
+}
+if(isset($options['rmbackupcron'])) {
+    removeBackupCron();
 }
 
 if (!file_put_contents($CONFIG_FILE, $config)) {
@@ -292,4 +304,17 @@ function existsInCrontab($string){
         return true;
     }
     return false;
+}
+
+function installBackupCron(){
+    $data = "0 0,12 * * *  root  cd /var/www/html/ && ./cgi.php module=v2 page=tools subpage=backup\n\n";
+    file_put_contents('/etc/cron.d/stingle-backup', $data);
+    exec("service cron reload");
+    echo "Successfully installed cronjob for backups\n";
+}
+
+function removeBackupCron(){
+    exec("rm -f '/etc/cron.d/stingle-backup'");
+    exec("service cron reload");
+    echo "Successfully removed cronjob for backups\n";
 }
