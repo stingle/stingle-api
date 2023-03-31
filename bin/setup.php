@@ -246,11 +246,6 @@ if($isFull || isset($options['hostname'])) {
         $exitCode = 0;
         $output = null;
         exec("certbot --apache -n --agree-tos --email $certbotEmail -d $hostname", $output, $exitCode);
-        if ($exitCode == 0) {
-            if(!existsInCrontab("certbot renew")) {
-                exec('(crontab -l ; echo "0 0 * * * certbot renew") | crontab');
-            }
-        }
     } else {
         file_put_contents($apacheConfPath, $apacheConf);
         exec('service apache2 reload');
