@@ -1,2 +1,3 @@
 <?php
 healthCheck(true);
+exit;
