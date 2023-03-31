@@ -12,8 +12,10 @@ $longopts  = array(
     "storage",
     "backup",
     "hostname",
-    "backupcron",
-    "rmbackupcron",
+    "backup-cron",
+    "rm-backup-cron",
+    "update-addons-cron",
+    "rm-cron::",
     "help"
 );
 $options = getopt($shortopts, $longopts);
@@ -23,16 +25,18 @@ if(empty($options) || isset($options['h']) || isset($options['help'])){
     echo "
 Setup script of Stingle API server
 Usage:
---full          Run full setup
---mysqlPass     MySQL password
---mysql         MySQL setup
---systemKeys    Generate system keys
---storage       S3 storage configuration
---backup        Backup configuration
---hostname      Set a hostname
---backupcron    Install cronjob for backups
---rmbackupcron  Remove cronjob for backups
--h --help       Display this help message
+--full                  Run full setup
+--mysqlPass             MySQL password
+--mysql                 MySQL setup
+--systemKeys            Generate system keys
+--storage               S3 storage configuration
+--backup                Backup configuration
+--hostname              Set a hostname
+--backup-cron           Install cronjob for backups
+--rm-backup-cron        Remove cronjob for backups
+--update-addons-cron    Update cronjobs from addons
+--rm-cron               Remove given addon's cron file
+-h --help               Display this help message
 ";
     exit;
 }
@@ -253,11 +257,21 @@ if($isFull || isset($options['hostname'])) {
     }
 }
 
-if(isset($options['backupcron'])) {
+if(isset($options['backup-cron'])) {
     installBackupCron();
 }
-if(isset($options['rmbackupcron'])) {
+if(isset($options['rm-backup-cron'])) {
     removeBackupCron();
+}
+if(isset($options['update-addons-cron'])) {
+    updateAddonsCron();
+}
+if(isset($options['rm-cron'])) {
+    if (empty($options['rm-cron'])) {
+        echo "Please enter name of the addon to delete it's cron file!\n";
+        exit;
+    }
+    removeCron($options['rm-cron']);
 }
 
 if (!file_put_contents($CONFIG_FILE, $config)) {
@@ -266,7 +280,9 @@ if (!file_put_contents($CONFIG_FILE, $config)) {
 }
 exec('chmod -R 777 cache/');
 
-echo "\nSETUP COMPLETE!\n\n";
+if($isFull) {
+    echo "\nSETUP COMPLETE!\n\n";
+}
 
 function prompt_silent($prompt = "Enter Password:") {
     if (preg_match('/^win/i', PHP_OS)) {
@@ -317,4 +333,35 @@ function removeBackupCron(){
     exec("rm -f '/etc/cron.d/stingle-backup'");
     exec("service cron reload");
     echo "Successfully removed cronjob for backups\n";
+}
+
+function updateAddonsCron(){
+    $addonsPath = 'addons/';
+    $files = scandir($addonsPath);
+    foreach($files as $file) {
+        if(is_dir($addonsPath . $file) && $file != '.' && $file != '..') {
+            if(file_exists($addonsPath . $file . '/crontab')){
+                $data = file_get_contents($addonsPath . $file . '/crontab');
+                file_put_contents("/etc/cron.d/$file", $data);
+                echo "Installing cronjob for addon $file\n";
+            }
+        }
+    }
+    exec("service cron reload");
+    echo "Successfully updated cronjobs of addons\n";
+}
+
+function removeCron($addonName){
+    if(in_array($addonName, ['certbot', 'e2scrub_all', 'stingle-backup', 'stingle-crontab'])){
+        echo "Failed! You canot delete default crontabs!\n";
+        return;
+    }
+    
+    if(file_exists("/etc/cron.d/$addonName")){
+        exec("rm -f '/etc/cron.d/$addonName'");
+        exec("service cron reload");
+        echo "Successfully removed cronjob for $addonName\n";
+        return;
+    }
+    echo "Failed! There is no cronjob for $addonName\n";
 }
