@@ -58,3 +58,11 @@ addons/addon-test
 |___ crontab
 |___ init.inc.php
 ```
+
+After installing a new addon, typically you want to update the composer dependencies that new addon may bring. In that case please run:
+
+```bash
+./bin/composer.sh update
+```
+
+Composer is configured in such a way that it will automatically scan all folders in `addons/` folder and will find and merge all `composer.json` files.
