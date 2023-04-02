@@ -69,5 +69,5 @@ $CONFIG['Language']['Language']['AuxConfig'] = [
     'useSession' => false,
     'useCookies' => false
 ];
-$CONFIG['Logger']['DbLogger']['AuxConfig']['saveIPInCustomLog'] = false;
-$CONFIG['Logger']['DbLogger']['AuxConfig']['isUsingSessions'] = false;
+$CONFIG['Logger']['DBLogger']['AuxConfig']['saveIPInCustomLog'] = false;
+$CONFIG['Logger']['DBLogger']['AuxConfig']['isUsingSessions'] = false;

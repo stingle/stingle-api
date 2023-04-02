@@ -8,13 +8,12 @@ if(!empty($_GET['rmcache'])){
     
     if(!defined('DISABLE_APCU') && extension_loaded('apcu')){
         exec('service apache2 reload');
-        //exec('systemctl reload httpd');
-        echo "Realoaded apache\n";
+        echo "Reloaded apache\n";
     }
 }
 
 if(!empty($_GET['composer'])){
-    exec('./composer.phar install -n');
+    exec('composer install -n');
 }
 if(!empty($_GET['memcache'])){
     Reg::get('memcache')->clearAllItems();

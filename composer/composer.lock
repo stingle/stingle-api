@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d18697f97e856451a23f0f0944e5b6d1",
+    "content-hash": "00dc75974fe30e4831533789701afdac",
     "packages": [
         {
             "name": "alexamiryan/stingle",
-            "version": "3.4.2",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexamiryan/stingle.git",
-                "reference": "4b5341eee307ff78ae208b581990ba5999733742"
+                "reference": "552b5f988b391d1848a876187444e158030cccb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexamiryan/stingle/zipball/4b5341eee307ff78ae208b581990ba5999733742",
-                "reference": "4b5341eee307ff78ae208b581990ba5999733742",
+                "url": "https://api.github.com/repos/alexamiryan/stingle/zipball/552b5f988b391d1848a876187444e158030cccb2",
+                "reference": "552b5f988b391d1848a876187444e158030cccb2",
                 "shasum": ""
             },
             "require": {
@@ -40,9 +40,9 @@
             ],
             "description": "Stingle PHP framework",
             "support": {
-                "source": "https://github.com/alexamiryan/stingle/tree/3.4.2"
+                "source": "https://github.com/alexamiryan/stingle/tree/3.4.4"
             },
-            "time": "2023-03-26T23:16:42+00:00"
+            "time": "2023-04-02T21:21:22+00:00"
         },
         {
             "name": "aws/aws-crt-php",
@@ -100,16 +100,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.262.3",
+            "version": "3.263.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f5c8142d43846194bbb3bb40b18e7f6df2788409"
+                "reference": "1f1ca8866e54aabdcde2aba177196ec2f12ee8a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5c8142d43846194bbb3bb40b18e7f6df2788409",
-                "reference": "f5c8142d43846194bbb3bb40b18e7f6df2788409",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1f1ca8866e54aabdcde2aba177196ec2f12ee8a2",
+                "reference": "1f1ca8866e54aabdcde2aba177196ec2f12ee8a2",
                 "shasum": ""
             },
             "require": {
@@ -188,9 +188,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.262.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.263.1"
             },
-            "time": "2023-03-28T18:18:50+00:00"
+            "time": "2023-03-31T18:21:25+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
