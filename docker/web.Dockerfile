@@ -1,4 +1,4 @@
-FROM php:8.0.28-apache-bullseye
+FROM php:8.0-apache-bullseye
 WORKDIR /var/www/html/
 RUN a2enmod rewrite
 RUN a2enmod ssl
