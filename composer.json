@@ -14,7 +14,7 @@
     }
   },
   "require": {
-    "alexamiryan/stingle": "^3.4.0",
+    "alexamiryan/stingle": "^3.4.3",
     "aws/aws-sdk-php": "^3.90",
     "ext-curl": "*",
     "ext-json": "*",
