@@ -4,15 +4,20 @@ RewriteBase /
 
 # Restrict access to .git
 RedirectMatch 404 /\.git*
-RedirectMatch 404 /cgi.php
-RedirectMatch 404 /composer*
-RedirectMatch 404 /vendor
-RedirectMatch 404 /docker*
-RedirectMatch 404 /.env
-RedirectMatch 404 /setup.sh
 RedirectMatch 404 /backups
-RedirectMatch 404 /addons
+RedirectMatch 404 /bin
+RedirectMatch 404 /cache
+RedirectMatch 404 /composer*
+RedirectMatch 404 /configs
+RedirectMatch 404 /configsSite
+RedirectMatch 404 /controllers
 RedirectMatch 404 /docker*
+RedirectMatch 404 /incs
+RedirectMatch 404 /uploads
+RedirectMatch 404 /vendor
+RedirectMatch 404 /.env
+RedirectMatch 404 /cgi.php
+RedirectMatch 404 /setup.sh
 
 ### Rewriting www url to non-www urls
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
