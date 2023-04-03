@@ -129,6 +129,8 @@ if($isFull || isset($options['storage'])) {
     removeBlock($config, "STORAGE");
     $config .= "
 ## STORAGE
+\$CONFIG['Users']['SiteUser']['AuxConfig']['defaultQuota'] = 1024; // In MB
+
 \$CONFIG['File']['S3Transport']['AuxConfig']['configs']['default'] = [
 	'credentials' => array(
 		'key' => '$s3Key',
