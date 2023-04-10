@@ -1,3 +1,3 @@
 #!/bin/bash
 source .env
-docker exec -it $CONTAINER_NAME"-web-1" bash -c "$@"
+docker compose -p $CONTAINER_NAME exec web bash -c "$@"
