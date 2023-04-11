@@ -85,8 +85,6 @@ if($isFull || isset($options['mysql'])) {
 // System Keys
 if($isFull || isset($options['systemKeys'])) {
     $aesKey = generateRandomString(40, [RANDOM_STRING_LOWERCASE, RANDOM_STRING_UPPERCASE, RANDOM_STRING_DIGITS, RANDOM_STRING_SYMBOLS]);
-    $aesIV = generateRandomString(32, [RANDOM_STRING_LOWERCASE, RANDOM_STRING_UPPERCASE, RANDOM_STRING_DIGITS, RANDOM_STRING_SYMBOLS]);
-    $aesSalt = generateRandomString(32, [RANDOM_STRING_LOWERCASE, RANDOM_STRING_UPPERCASE, RANDOM_STRING_DIGITS, RANDOM_STRING_SYMBOLS]);
     $siteSalt = generateRandomString(64, [RANDOM_STRING_LOWERCASE, RANDOM_STRING_UPPERCASE, RANDOM_STRING_DIGITS, RANDOM_STRING_SYMBOLS]);
     $SPEncKey = base64_encode(sodium_crypto_secretbox_keygen());
     
@@ -97,8 +95,6 @@ if($isFull || isset($options['systemKeys'])) {
 \$CONFIG['Debug']['send_keybase_on_exception'] = false;
 
 \$CONFIG['Crypto']['AES256']['AuxConfig']['key'] = '$aesKey';
-\$CONFIG['Crypto']['AES256']['AuxConfig']['iv'] = '$aesIV';
-\$CONFIG['Crypto']['AES256']['AuxConfig']['salt'] = '$aesSalt';
 \$CONFIG['Users']['Users']['AuxConfig']['siteSalt'] = '$siteSalt';
 \$CONFIG['StinglePhotos']['SPKeys']['AuxConfig']['encryptionKey'] = '$SPEncKey';
 ## /SYSTEMKEYS
