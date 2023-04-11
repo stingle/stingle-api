@@ -4,8 +4,6 @@ $CONFIG['Host']['Host']['AuxConfig']['cgiHost'] = "api.stingle.org";
 
 
 $CONFIG['Crypto']['AES256']['AuxConfig']['key'] = '';
-$CONFIG['Crypto']['AES256']['AuxConfig']['iv'] = '';
-$CONFIG['Crypto']['AES256']['AuxConfig']['salt'] = '';
 
 $CONFIG['Backup']['PublicKey'] = '';
 $CONFIG['Backup']['Limit'] = 5;
