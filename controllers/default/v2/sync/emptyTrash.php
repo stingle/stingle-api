@@ -3,7 +3,7 @@
 use SPSync\v2\SPSyncManager;
 
 $params = getApiRequestSecureParams();
-if(!empty($params)) {
+if(!empty($params) && !empty($params->time)){
     
     
     $seconds = round(microtime(true));

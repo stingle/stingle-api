@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "alexamiryan/stingle",
-            "version": "3.4.4",
+            "version": "3.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexamiryan/stingle.git",
-                "reference": "552b5f988b391d1848a876187444e158030cccb2"
+                "reference": "86edbeb0fff70138fc40f7913d2bf50f0ac4718b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexamiryan/stingle/zipball/552b5f988b391d1848a876187444e158030cccb2",
-                "reference": "552b5f988b391d1848a876187444e158030cccb2",
+                "url": "https://api.github.com/repos/alexamiryan/stingle/zipball/86edbeb0fff70138fc40f7913d2bf50f0ac4718b",
+                "reference": "86edbeb0fff70138fc40f7913d2bf50f0ac4718b",
                 "shasum": ""
             },
             "require": {
@@ -40,9 +40,9 @@
             ],
             "description": "Stingle PHP framework",
             "support": {
-                "source": "https://github.com/alexamiryan/stingle/tree/3.4.4"
+                "source": "https://github.com/alexamiryan/stingle/tree/3.4.7"
             },
-            "time": "2023-04-02T21:21:22+00:00"
+            "time": "2023-04-11T01:44:49+00:00"
         },
         {
             "name": "aws/aws-crt-php",
