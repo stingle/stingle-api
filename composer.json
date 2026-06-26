@@ -3,12 +3,13 @@
   "description": "Stingle API server",
   "config": {
     "platform": {
-      "php": "7.3"
+      "php": "8.3"
     },
     "discard-changes": false,
     "optimize-autoloader": true,
     "classmap-authoritative": true,
     "apcu-autoloader": true,
+    "process-timeout": 0,
     "allow-plugins": {
       "wikimedia/composer-merge-plugin": true
     }

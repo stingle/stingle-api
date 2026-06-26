@@ -18,7 +18,8 @@ $CONFIG['Users']['Users']['AuxConfig'] = [
         'pwsalt' => 'pwsalt',
         'baseQuota' => 'base_quota',
         'spaceUsed' => 'space_used',
-        'spaceQuota' => 'space_quota'
+        'spaceQuota' => 'space_quota',
+        'emailBounced' => 'email_bounced'
     ]
 ];
 

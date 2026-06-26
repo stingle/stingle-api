@@ -56,6 +56,26 @@ $CONFIG['Security']['RequestLimiter']['AuxConfig']['limits'] = [
     'share' => 5
 ];
 
+// Routes exempted from the general rate limiter (matched as "<section>/<action>").
+// File download / signed-URL endpoints are excluded so aggressive thumbnail
+// fetching during sync doesn't trip the 'gen' flood limit.
+$CONFIG['Security']['RequestLimiter']['AuxConfig']['excludedPaths'] = [
+    'sync/download',
+    'sync/downloadRedir',
+    'sync/getUrl',
+    'sync/getDownloadUrls',
+];
+
 $CONFIG['Users']['SiteUser']['AuxConfig']['defaultQuota'] = 1024; // In MB
 
+
+// Mail: send all framework-generated email through the Resend (https://resend.com) API.
+$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['fromMail'] = 'no-reply@stingle.org';
+$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['fromName'] = 'Stingle Photos';
+$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['transport'] = 'ResendTransport';
+// Secrets (real values go in configsSite/config.override.inc.php, which is gitignored):
+//   $CONFIG['Mail']['Resend']['AuxConfig']['apiKey']        = 're_...';
+//   $CONFIG['Mail']['Resend']['AuxConfig']['webhookSecret'] = 'whsec_...'; // for bounce webhook
+$CONFIG['Mail']['Resend']['AuxConfig']['apiKey'] = '';
+$CONFIG['Mail']['Resend']['AuxConfig']['webhookSecret'] = '';
 

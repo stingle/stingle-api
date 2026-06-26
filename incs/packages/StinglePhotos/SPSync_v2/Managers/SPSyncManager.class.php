@@ -1141,7 +1141,7 @@ class SPSyncManager extends DbAccessor
     public function parseFile($filePath): ?SPFile {
         $fd = fopen($filePath, 'rb');
         if ($fd === false) {
-            return false;
+            return null;
         }
         
         $spFile = new SPFile();

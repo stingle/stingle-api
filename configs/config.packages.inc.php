@@ -16,3 +16,4 @@ $CONFIG['Packages'][] = array("File", "S3Transport;FileUploader");
 $CONFIG['Packages'][] = array("StinglePhotos", "SPKeys");
 $CONFIG['Packages'][] = array("Logger", "DBLogger");
 $CONFIG['Packages'][] = array("Notifications", "Keybase");
+$CONFIG['Packages'][] = array("Mail", "Mail;Resend");

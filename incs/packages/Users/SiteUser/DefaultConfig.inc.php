@@ -9,6 +9,6 @@ $defaultConfig = [
         'defaultQuota' => 1024  // In MB
     ],
     'Tables' => [
-        'wum_users_properties' => 1
+        'wum_users_properties' => 2
     ],
 ];
