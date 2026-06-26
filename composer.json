@@ -21,7 +21,8 @@
     "ext-json": "*",
     "ext-sodium": "*",
     "ext-openssl": "*",
-    "wikimedia/composer-merge-plugin": "^2.0.1"
+    "wikimedia/composer-merge-plugin": "^2.0.1",
+    "soundasleep/html2text": "*"
   },
   "repositories": [
     {
