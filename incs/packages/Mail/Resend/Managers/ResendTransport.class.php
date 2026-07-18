@@ -69,6 +69,8 @@ class ResendTransport implements MailTransportInterface {
 				'Authorization: Bearer ' . $this->config->apiKey,
 				'Content-Type: application/json',
 			),
+			CURLOPT_CONNECTTIMEOUT => 5,
+			CURLOPT_TIMEOUT => 20,
 		));
 
 		$response = curl_exec($curl);

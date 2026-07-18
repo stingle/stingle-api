@@ -79,8 +79,14 @@ if(Reg::get('ao')->isStatusOk()){
             
                     $newAlbum->dateCreated = $now;
                     $newAlbum->dateModified = $now;
-            
-                    Reg::get('spsync')->addAlbumToDb($newAlbum);
+
+					Reg::get('spsync')->addAlbumToDb($newAlbum);
+
+					$event = array(
+						'recipient' => $user,
+						'sharedBy' => Reg::get('usr')
+					);
+					HookManager::callHook('SharedAlbumReceived', $event);
             
                     Reg::get('spsync')->insertMutualContacts(Reg::get('usr'), $user);
                     foreach ($currentParticipantIds as $uid) {

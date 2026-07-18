@@ -31,6 +31,12 @@ if(Reg::get('ao')->isStatusOk()){
             Reg::get('userMgr')->updateUser($usr);
             
             Reg::get('userSess')->revokeAllSessions($usr->id);
+
+            $event = array(
+                'user' => $usr,
+                'eventTime' => getMilliseconds()
+            );
+            HookManager::callHook('UserAccountRecovered', $event);
             
             Reg::get('ao')->set('result', "OK");
         }

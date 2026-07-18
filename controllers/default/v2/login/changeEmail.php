@@ -21,14 +21,24 @@ if(Reg::get('ao')->isStatusOk()){
             Reg::get('ao')->setStatusNotOk();
         }
         else {
+            $previousUser = unserialize(serialize(Reg::get('usr')));
             Reg::get('usr')->login = $params->newEmail;
             Reg::get('usr')->email = $params->newEmail;
+			Reg::get('usr')->emailConfirmed = UserManager::STATE_EMAIL_UNCONFIRMED;
+			Reg::get('usr')->props->emailBounced = 0;
     
             Reg::get('userMgr')->updateUser(Reg::get('usr'));
             
             $usr = Reg::get('usr');
             HookManager::callHook('EmailChanged',$usr);
-            
+
+            $event = array(
+                'user' => $usr,
+                'previousUser' => $previousUser,
+                'eventTime' => getMilliseconds()
+            );
+            HookManager::callHook('UserEmailChanged', $event);
+
             Reg::get('ao')->set('email', $params->newEmail);
         }
     }

@@ -25,7 +25,9 @@ function recordException($e){
 	if(Reg::isRegistered('sql') and Reg::get('packageMgr')->isPluginLoaded('Logger', 'DBLogger')){
 		DBLogger::logCustom("Exception", format_exception($e));
 	}
-	if(ConfigManager::getGlobalConfig()->Debug->send_email_on_exception and Reg::isRegistered('mail')){
+	if(ConfigManager::getGlobalConfig()->Debug->send_email_on_exception
+		and Reg::isRegistered('mail')
+		and method_exists(Reg::get('mail'), 'exception')){
 		Reg::get('mail')->exception("Exception", format_exception($e, true));
 	}
     
@@ -42,4 +44,3 @@ function localExceptionHandler($params) {
         echo json_encode(['status' => 'nok']);
     }
 }
-

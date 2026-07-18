@@ -68,14 +68,3 @@ $CONFIG['Security']['RequestLimiter']['AuxConfig']['excludedPaths'] = [
 
 $CONFIG['Users']['SiteUser']['AuxConfig']['defaultQuota'] = 1024; // In MB
 
-
-// Mail: send all framework-generated email through the Resend (https://resend.com) API.
-$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['fromMail'] = 'no-reply@stingle.org';
-$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['fromName'] = 'Stingle Photos';
-$CONFIG['Mail']['Mail']['AuxConfig']['mailParams']['default']['transport'] = 'ResendTransport';
-// Secrets (real values go in configsSite/config.override.inc.php, which is gitignored):
-//   $CONFIG['Mail']['Resend']['AuxConfig']['apiKey']        = 're_...';
-//   $CONFIG['Mail']['Resend']['AuxConfig']['webhookSecret'] = 'whsec_...'; // for bounce webhook
-$CONFIG['Mail']['Resend']['AuxConfig']['apiKey'] = '';
-$CONFIG['Mail']['Resend']['AuxConfig']['webhookSecret'] = '';
-

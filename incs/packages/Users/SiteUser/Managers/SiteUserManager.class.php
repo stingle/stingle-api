@@ -107,6 +107,14 @@ class SiteUserManager extends UserManagerCaching{
         
         $count = parent::deleteUser($user);
         $debugOutput .= "Deleted $count users\n";
+
+		if($count){
+			$event = array(
+				'user' => $user,
+				'eventTime' => getMilliseconds()
+			);
+			HookManager::callHook('UserDeleteComplete', $event);
+		}
     
         DBLogger::logCustom("UserDelete", $debugOutput);
         

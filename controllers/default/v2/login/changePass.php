@@ -39,8 +39,14 @@ try {
         Reg::get('spkeys')->updateKeyBundle(Reg::get('usr')->id, $keyBundle);
         
         Reg::get('userSess')->revokeAllSessions(Reg::get('usr')->id);
-        
+
         Reg::get('ao')->set('token', Reg::get('userSess')->addSession(Reg::get('usr')->id));
+
+        $event = array(
+            'user' => Reg::get('usr'),
+            'eventTime' => getMilliseconds()
+        );
+        HookManager::callHook('UserPasswordChanged', $event);
     }
 }
 catch (Exception $e){
