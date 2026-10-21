@@ -23,7 +23,8 @@ if(!empty($params) && !empty($params->time)){
         }
         Reg::get('spsync')->deleteActualFiles();
     } catch (Exception $e) {
-        Reg::get('error')->add(C("Something went wrong.\n" . format_exception($e)));
+        Reg::get('error')->add(C("Something went wrong.\n" . $e->getMessage()));
+        recordException($e);
         Reg::get('ao')->setStatusNotOk();
     }
 }

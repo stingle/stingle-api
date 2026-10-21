@@ -491,7 +491,9 @@ class SPSyncManager extends DbAccessor
             $data['userId'] = $file->userId;
         }
         
-        if($this->isFileExistsInDb($file->file, Reg::get('userMgr')->getUserById($file->userId), $set, $file->albumId)){
+        // Album rows are keyed by file + albumId (they carry no userId), matching the update below
+        $owner = ($set == self::SET_ALBUM ? null : Reg::get('userMgr')->getUserById($file->userId));
+        if($this->isFileExistsInDb($file->file, $owner, $set, $file->albumId)){
             $qb->update(self::getTableNameBySet($set));
             foreach ($data as $key=>$value){
                 $qb->set(new Field($key), $value);

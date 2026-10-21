@@ -16,6 +16,6 @@ try {
     }
 }
 catch (Exception $e) {
-    Reg::get('error')->add(C('Incorrect password!') . " - " . format_exception($e));
+    Reg::get('error')->add(C('Incorrect password!'));
     Reg::get('ao')->setStatusNotOk();
 }

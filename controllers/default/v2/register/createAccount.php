@@ -56,7 +56,8 @@ else{
     }
     catch (UserNotFoundException $e){
         //Reg::get('error')->add(C('Error: User does not exist'));
-        Reg::get('error')->add(format_exception($e));
+        Reg::get('error')->add($e->getMessage());
         Reg::get('ao')->setStatusNotOk();
+        recordException($e);
     }
 }
