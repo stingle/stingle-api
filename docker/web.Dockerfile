@@ -1,4 +1,4 @@
-FROM php:8.3-apache-bookworm
+FROM php:8.3.36-apache-bookworm
 WORKDIR /var/www/html/
 RUN a2enmod rewrite
 RUN a2enmod ssl
