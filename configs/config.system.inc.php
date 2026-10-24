@@ -72,3 +72,13 @@ $CONFIG['Language']['Language']['AuxConfig'] = [
 ];
 $CONFIG['Logger']['DBLogger']['AuxConfig']['saveIPInCustomLog'] = false;
 $CONFIG['Logger']['DBLogger']['AuxConfig']['isUsingSessions'] = false;
+// log_mixed retention in days per log name, purged hourly by cron/garbageCollector. '*' covers all other names.
+$CONFIG['Logger']['DBLogger']['AuxConfig']['retentionDays'] = [
+    'Exception' => 90,
+    'JobQueue' => 90,
+    'resend' => 90,
+    'bounce' => 90,
+    'mail' => 90,
+    'UserDelete' => 30,
+    '*' => 400
+];

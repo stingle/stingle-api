@@ -32,18 +32,18 @@ class SiteUserManager extends UserManagerCaching{
     
     public function deleteUserFiles(User $user){
         $debugOutput = "";
-        $debugOutput .= "Deleting user files {$user->login} with ID {$user->id}\n\n";
+        $debugOutput .= "Deleting user files for user ID {$user->id}\n\n";
         $files = Reg::get('spsync')->getFilesListHelper($user, null, SPSyncManager::SET_GALLERY);
         foreach($files as $file){
             Reg::get('spsync')->deleteFile($file['file'], $user, SPSyncManager::SET_GALLERY, true);
-            $debugOutput .= "Deleted MAIN - " . $file['file'] . "\n";
         }
-    
+        $debugOutput .= "Deleted " . count($files) . " gallery files\n";
+
         $albumFiles = Reg::get('spsync')->getFilesListHelper($user, null, SPSyncManager::SET_ALBUM);
         foreach($albumFiles as $file){
             Reg::get('spsync')->deleteFile($file['file'], $user, SPSyncManager::SET_ALBUM, true);
-            $debugOutput .= "Deleted ALBUM FILE - " . $file['file'] . "\n";
         }
+        $debugOutput .= "Deleted " . count($albumFiles) . " album files\n";
     
         $albums = Reg::get('spsync')->getAlbumsListAfterDate($user, null);
         foreach($albums as $album){
@@ -68,14 +68,14 @@ class SiteUserManager extends UserManagerCaching{
                 }
             }
             catch (SPPermissionCheckFailureException $e){}
-            $debugOutput .= "Deleted album - " . $album['albumId'] . "\n";
         }
-    
+        $debugOutput .= "Deleted " . count($albums) . " albums\n";
+
         $trash = Reg::get('spsync')->getFilesListHelper($user, null, SPSyncManager::SET_TRASH);
         foreach($trash as $file){
             Reg::get('spsync')->deleteFile($file['file'], $user, SPSyncManager::SET_TRASH, true);
-            $debugOutput .= "Deleted TRASH - " . $file['file'] . "\n";
         }
+        $debugOutput .= "Deleted " . count($trash) . " trash files\n";
         Reg::get('spsync')->deleteActualFiles();
     
         $count = Reg::get('spsync')->removeDeleteEventsFromDb($user);
