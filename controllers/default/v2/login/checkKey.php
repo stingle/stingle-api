@@ -4,7 +4,7 @@ $email = (isset($_POST['email'])) ? $_POST['email'] : null;
 
 recordRequest('checkKey');
 
-if(!Reg::get('userMgr')->isLoginExists($email)){
+if(empty($email) || !Reg::get('userMgr')->isLoginExists($email)){
     Reg::get('error')->add(C('User with specified email doesn\'t exist'));
     Reg::get('ao')->setStatusNotOk();
 }

@@ -10,6 +10,11 @@ if(empty($_GET['email'])){
     exit;
 }
 
+if(empty($_GET['quota'])){
+    echo "Missing quota, e.g. quota=1T\n";
+    exit;
+}
+
 try {
     $user = Reg::get('userMgr')->getUserByLogin($_GET['email']);
 }
