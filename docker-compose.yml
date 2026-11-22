@@ -15,7 +15,7 @@ services:
       - "apache:/etc/apache2"
   mysql-server:
     restart: always
-    image: mysql:8-debian
+    image: mysql:8.0.46-debian
     volumes:
       - "mysql:/var/lib/mysql"
     environment:
@@ -26,10 +26,10 @@ services:
       MYSQL_DATABASE: 'stingle_api'
   memcached:
     restart: always
-    image: memcached:latest
+    image: memcached:1.6.45
   phpmyadmin:
     restart: always
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:5.2.3-apache
     links:
       - mysql-server
     ports:
